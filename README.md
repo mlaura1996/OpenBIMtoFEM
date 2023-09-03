@@ -1,2 +1,4 @@
 # OpenBIMtoFEM
-A tool for using IFC files to perform finite element analysis in a complete open framework
+A tool for using IFC files to perform finite element analysis in a completely open framework. 
+
+Work in progress!
