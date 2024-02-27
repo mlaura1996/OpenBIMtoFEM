@@ -13,6 +13,7 @@ List of packages to install
 - pip install gmsh
 - pip install openseespy
 - pip install ifcopenshell
+- install gmsh2opensees https://github.com/jaabell/gmsh2opensees/tree/main
 - pip install opensees
 - pip install openseeswin
 - conda install -c conda-forge pythonocc-core
