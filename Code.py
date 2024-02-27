@@ -7,7 +7,7 @@ import openseespy.opensees as ops
 
 
 
-ifcFile = ifcopenshell.open("Facade10.ifc")
+ifcFile = ifcopenshell.open("StructuralModel.ifc") #herecallyourfile
 elements = ifcFile.by_type('IfcElement')
 
 print(elements)
