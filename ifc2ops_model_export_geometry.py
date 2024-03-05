@@ -10,6 +10,7 @@ def exportProperties(ifcFile, elements):
     FullDictionaries = []
     i = 0
 
+    
     for element in elements:
 
         # PropertiesName = ['solidMaterialTag']
@@ -24,8 +25,19 @@ def exportProperties(ifcFile, elements):
             if hasattr(matNameRel, "Name") == True: #to see if the material is associated with the element
                 matName = matNameRel.Name
                 print(matName)
-            else:
-                print("Error, there is no name!")
+            
+            elif rel.RelatingMaterial.is_a()=="IfcMaterialLayerSet": #because of Roofs
+                for matlayer in rel.RelatingMaterial.MaterialLayers:
+                    print(matlayer)
+                    matName = matlayer.Material.Name
+                    print(matName)
+
+            elif rel.RelatingMaterial.is_a()=="IfcMaterialProfileSet": #because of Beams/columns
+                for matlayer in rel.RelatingMaterial.MaterialLayers:
+                    print(matlayer)
+                    matName = matlayer.Material.Name
+                    print(matName)        
+
 
         # in case Material is in the type
         for Type in element.IsTypedBy:
@@ -45,23 +57,23 @@ def exportProperties(ifcFile, elements):
                         print(matName)
 
         for material in materials:
-                    if material.Name == matName:
-                        #print(material.HasProperties) #prints all the psets
-                        for pset in material.HasProperties:
-                            PropertiesName.append('MaterialName')
-                            label = str(matName)
-                            PropertiesValue.append(label) #this is to create physical groups 
+            if material.Name == matName:
+                #print(material.HasProperties) #prints all the psets
+                for pset in material.HasProperties:
+                    PropertiesName.append('MaterialName')
+                    label = str(matName)
+                    PropertiesValue.append(label) #this is to create physical groups 
 
-                            if pset.Name == "Pset_MaterialCommon" or pset.Name == "Pset_MaterialMechanical":
-                                #print(PropertiesName)                          
-                                property = [item for item in pset if isinstance(item, tuple)] #the properties are stored as tuples
-                                for ele in property[0]:
-                                    #print(ele)
-                                    PropertyName = ele[0]
-                                    PropertyValue = ele[2][0]
-                                    #print(PropertyName, ":", PropertyValue)
-                                    PropertiesName.append(PropertyName)
-                                    PropertiesValue.append(PropertyValue)
+                    if pset.Name == "Pset_MaterialCommon" or pset.Name == "Pset_MaterialMechanical":
+                        #print(PropertiesName)                          
+                        property = [item for item in pset if isinstance(item, tuple)] #the properties are stored as tuples
+                        for ele in property[0]:
+                            #print(ele)
+                            PropertyName = ele[0]
+                            PropertyValue = ele[2][0]
+                            #print(PropertyName, ":", PropertyValue)
+                            PropertiesName.append(PropertyName)
+                            PropertiesValue.append(PropertyValue)
 
         dictionary = {PropertiesName[i]: PropertiesValue[i] for i in range(len(PropertiesName))}
 
