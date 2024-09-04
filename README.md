@@ -1,7 +1,9 @@
 # OpenBIMtoFEM
 A tool for using IFC files to perform finite element analysis in a completely open framework. 
 
-Following are the instructions to install the environment needed to run the scripts:
+Use the *docum.pdf* to install the same anaconda eviroment as me :)
+
+alternatively, following are the instructions to install the environment needed to run the scripts:
 
 - Run anaconda powershell
 - Run the commands to create a virtual environment
